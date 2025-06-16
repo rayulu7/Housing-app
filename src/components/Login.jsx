@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './Login.css'; // External CSS
+import { useNavigate } from 'react-router-dom'; // <-- Added
+import './Login.css';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from './firebase';
 import { toast } from 'react-toastify';
@@ -8,7 +9,8 @@ import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // Local state to manage visibility
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate(); // <-- Hook used
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -20,11 +22,12 @@ const Login = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      console.log("Logging in with:", { email, password });
+      const user = auth.currentUser;
+      console.log("User logged in:", user); // <-- Debug log
       toast.success("User logged in successfully!", { position: "top-center" });
 
-      // Redirect to profile after successful login
-      window.location.href = "/profile";
+      // ✅ Safe redirect using react-router
+      navigate("/profile");
     } catch (error) {
       console.error("Login error:", error.message);
       toast.error(error.message, { position: "bottom-center" });
@@ -32,8 +35,7 @@ const Login = () => {
   };
 
   const handleCreateNew = () => {
-    // Navigate to Register page
-    window.location.href = "/register";
+    navigate("/register");
   };
 
   const togglePasswordVisibility = () => {

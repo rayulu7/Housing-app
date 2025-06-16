@@ -15,7 +15,15 @@ const Profile = () => {
 
   // Fetch users from Firestore
   useEffect(() => {
-    const fetchUsers = async () => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (!user) {
+       
+        window.location.href = "/login";
+        return;
+      }
+
+      console.log("Current user:", user); // <-- Debug log
+
       try {
         const usersCollection = collection(db, "users");
         const userSnapshot = await getDocs(usersCollection);
@@ -31,9 +39,9 @@ const Profile = () => {
       } finally {
         setLoading(false);
       }
-    };
+    });
 
-    fetchUsers();
+    return () => unsubscribe(); // Cleanup
   }, []);
 
   // Handle Logout
@@ -153,7 +161,7 @@ const Profile = () => {
         Logout
       </button>
 
-      <ToastContainer />
+      
     </div>
   );
 };
