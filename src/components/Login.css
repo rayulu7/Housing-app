@@ -12,11 +12,11 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f0f2f5;
+  background-color: #f0f2f5; 
 }
 
 .heading {
-  color: #52177C;
+  color: #52177c;
   font-family: "League Spartan";
   font-size: 28px;
   margin-bottom: 40px;
@@ -40,6 +40,7 @@ body {
 
 .form-group {
   margin-bottom: 20px;
+  position: relative;
 }
 
 .form-group label {
@@ -58,10 +59,29 @@ body {
   box-sizing: border-box;
 }
 
+/* Password Toggle Icon */
+.password-container input {
+  padding-right: 40px;
+}
+
+.toggle-password-visibility {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  color: #888;
+  user-select: none;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+}
+
 .login-button {
   width: 100%;
   padding: 12px;
-  background-color: #52177C;
+  background-color: #52177c;
   color: white;
   border: none;
   border-radius: 6px;
@@ -79,11 +99,11 @@ body {
   margin-top: 10px;
   text-align: center;
   font-size: 14px;
-  color: #52177C;
+  color: #52177c;
 }
 
 .signup-link a {
-  color: #52177C;
+  color: #52177c;
   text-decoration: none;
   font-weight: bold;
 }
@@ -106,6 +126,6 @@ body {
 }
 
 .create-button:hover {
-  background-color: #52177C;
+  background-color: #52177c;
   color: white;
 }

@@ -3,10 +3,12 @@ import './Login.css'; // External CSS
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from './firebase';
 import { toast } from 'react-toastify';
+import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // Local state to manage visibility
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -34,6 +36,10 @@ const Login = () => {
     window.location.href = "/register";
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className="login-container">
       <h1 className="heading">housing.in</h1>
@@ -51,15 +57,24 @@ const Login = () => {
         </div>
 
         {/* Password Field */}
-        <div className="form-group">
+        <div className="form-group password-container">
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             id="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+          <span
+            className="toggle-password-visibility"
+            onClick={togglePasswordVisibility}
+            aria-label="Toggle password visibility"
+            role="button"
+            tabIndex="0"
+          >
+            {showPassword ? <IoMdEye /> : <IoMdEyeOff />}
+          </span>
         </div>
 
         {/* Login Button */}
