@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // <-- Added
+import { useNavigate } from 'react-router-dom'; 
 import './Login.css';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from './firebase';
@@ -10,7 +10,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate(); // <-- Hook used
+  const navigate = useNavigate(); 
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -23,10 +23,10 @@ const Login = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       const user = auth.currentUser;
-      console.log("User logged in:", user); // <-- Debug log
+      console.log("User logged in:", user); 
       toast.success("User logged in successfully!", { position: "top-center" });
 
-      // ✅ Safe redirect using react-router
+      
       navigate("/profile");
     } catch (error) {
       console.error("Login error:", error.message);

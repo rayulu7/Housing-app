@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+
 import "./App.css";
 import {
   BrowserRouter as Router,
@@ -25,11 +27,15 @@ function App() {
       setLoading(false);
     });
 
-    return () => unsubscribe(); // Cleanup listener
+    return () => unsubscribe(); 
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>; // Or a spinner
+    return <DotLottieReact
+      src="https://lottie.host/554865d0-7321-4555-a55b-5f2c43b86877/jRiPqFkmJX.lottie"
+      loop
+      autoplay
+    />; 
   }
 
   return (

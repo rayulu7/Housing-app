@@ -4,9 +4,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { IoIosArrowDropright, IoIosArrowDropleft } from 'react-icons/io';
 import './Register.css';
 
-// Firebase imports
+
 import { auth, db, createUserWithEmailAndPassword, collection, addDoc } from './firebase';
-import { useNavigate } from 'react-router-dom'; // For navigation
+import { useNavigate } from 'react-router-dom'; 
 
 const Register = () => {
   const navigate = useNavigate();
@@ -27,13 +27,13 @@ const Register = () => {
   const [locality, setLocality] = useState('');
   const [phoneCode, setPhoneCode] = useState('+91');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [loading, setLoading] = useState(false); // Loading state
+  const [loading, setLoading] = useState(false); 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
 
-    // Validation
+    
     if (!fname || !lname || !email || !password || !confirmPassword || !gender || !day || !month || !year) {
       toast.error('Please fill in all required fields.');
       setLoading(false);
@@ -47,14 +47,14 @@ const Register = () => {
     }
 
     try {
-      // Step 1: Create user with Firebase Auth
+      
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // Small delay to make sure auth is fully ready
+      
       await new Promise(resolve => setTimeout(resolve, 500));
 
-      // Step 2: Save additional user data to Firestore
+      
       await addDoc(collection(db, 'users'), {
         uid: user.uid,
         fname,
@@ -73,7 +73,7 @@ const Register = () => {
         createdAt: new Date(),
       });
 
-      // Reset form fields
+      
       setFname('');
       setLname('');
       setEmail('');
@@ -91,7 +91,7 @@ const Register = () => {
       setPhoneCode('+91');
       setPhoneNumber('');
       
-      // Show success message and redirect
+      
       toast.success('Registration successful!', {
         position: 'top-center',
         autoClose: 3000,

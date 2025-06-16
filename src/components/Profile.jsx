@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+
+
 import 'react-toastify/dist/ReactToastify.css';
 import './Profile.css';
 
@@ -13,7 +16,7 @@ const Profile = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedGender, setSelectedGender] = useState('');
 
-  // Fetch users from Firestore
+  
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (!user) {
@@ -22,7 +25,7 @@ const Profile = () => {
         return;
       }
 
-      console.log("Current user:", user); // <-- Debug log
+      console.log("Current user:", user); 
 
       try {
         const usersCollection = collection(db, "users");
@@ -41,22 +44,22 @@ const Profile = () => {
       }
     });
 
-    return () => unsubscribe(); // Cleanup
+    return () => unsubscribe(); 
   }, []);
 
-  // Handle Logout
+  
   async function handleLogout() {
     try {
-      await signOut(auth); // Log out the user
+      await signOut(auth); 
       toast.success("Logged out successfully!");
-      window.location.href = "/login"; // Redirect to login page
+      window.location.href = "/login"; 
     } catch (error) {
       console.error("Logout error:", error.message);
       toast.error("Failed to log out.");
     }
   }
 
-  // Filter users based on search term and gender
+  
   const filteredUsers = users
     .filter((user) =>
       user.fname.toLowerCase().startsWith(searchTerm.toLowerCase())
@@ -65,7 +68,7 @@ const Profile = () => {
       if (selectedGender) {
         return user.gender === selectedGender;
       }
-      return true; // Show all if no gender is selected
+      return true; 
     });
 
   return (
@@ -114,7 +117,11 @@ const Profile = () => {
 
           {/* User Table */}
           {loading ? (
-            <p>Loading users...</p>
+            <DotLottieReact
+      src="https://lottie.host/b68051e4-e953-44b7-88d2-c97ccd5ad262/4maKY1pCnF.lottie"
+      loop
+      autoplay
+    />
           ) : (
             <div className="user-data-table">
               <table>
