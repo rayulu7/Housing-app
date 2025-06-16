@@ -18,12 +18,7 @@ import {
 } from "firebase/firestore";
 
 
-console.log("VITE_FIREBASE_API_KEY:", import.meta.env.VITE_FIREBASE_API_KEY);
-console.log("Firebase Config:", {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-});
+console.log("Project ID:", import.meta.env.VITE_FIREBASE_PROJECT_ID);
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
