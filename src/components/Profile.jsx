@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-
 
 import 'react-toastify/dist/ReactToastify.css';
 import './Profile.css';
@@ -14,18 +12,14 @@ const Profile = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedGender, setSelectedGender] = useState('');
+  const [selectedTags, setSelectedTags] = useState([]); // Track selected tags
 
-  
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (!user) {
-       
         window.location.href = "/login";
         return;
       }
-
-      console.log("Current user:", user); 
 
       try {
         const usersCollection = collection(db, "users");
@@ -44,31 +38,52 @@ const Profile = () => {
       }
     });
 
-    return () => unsubscribe(); 
+    return () => unsubscribe();
   }, []);
 
-  
   async function handleLogout() {
     try {
-      await signOut(auth); 
+      await signOut(auth);
       toast.success("Logged out successfully!");
-      window.location.href = "/login"; 
+      window.location.href = "/login";
     } catch (error) {
       console.error("Logout error:", error.message);
       toast.error("Failed to log out.");
     }
   }
 
-  
-  const filteredUsers = users
-    .filter((user) =>
-      user.fname.toLowerCase().startsWith(searchTerm.toLowerCase())
-    )
-    .filter((user) => {
-      if (selectedGender) {
-        return user.gender === selectedGender;
+  const toggleTag = (tag) => {
+    setSelectedTags((prev) => {
+      if (tag === 'all') {
+        return ['all'];
       }
-      return true; 
+
+      if (prev.includes('all')) {
+        return [tag];
+      }
+
+      if (prev.includes(tag)) {
+        return prev.filter(t => t !== tag);
+      } else {
+        return [...prev, tag];
+      }
+    });
+  };
+
+  const removeTag = (tagToRemove) => {
+    setSelectedTags(prev => prev.filter(tag => tag !== tagToRemove));
+  };
+
+  const filteredUsers = users
+    .filter((user) => {
+      const fullName = `${user.fname} ${user.lname}`.toLowerCase();
+      const searchTermLower = searchTerm.toLowerCase();
+
+      return fullName.startsWith(searchTermLower) ||  user.email?.toLowerCase().includes(searchTermLower);
+    })
+    .filter((user) => {
+      if (selectedTags.includes('all') || selectedTags.length === 0) return true;
+      return selectedTags.includes(user.gender?.toLowerCase());
     });
 
   return (
@@ -88,8 +103,8 @@ const Profile = () => {
                 type="radio"
                 name="gender"
                 value="male"
-                checked={selectedGender === 'male'}
-                onChange={() => setSelectedGender('male')}
+                checked={selectedTags.includes('male')}
+                onChange={() => toggleTag('male')}
               />
               Male
             </label>
@@ -98,16 +113,37 @@ const Profile = () => {
                 type="radio"
                 name="gender"
                 value="female"
-                checked={selectedGender === 'female'}
-                onChange={() => setSelectedGender('female')}
+                checked={selectedTags.includes('female')}
+                onChange={() => toggleTag('female')}
               />
               Female
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="gender"
+                value="all"
+                checked={selectedTags.includes('all')}
+                onChange={() => toggleTag('all')}
+              />
+              All
             </label>
           </div>
         </div>
 
         {/* Right Section: Search and Table */}
         <div className="table-section">
+          {/* Display applied filters as tags */}
+          <div className="filter-tags">
+            <span className="filter-applied">Filter applied</span>
+            {selectedTags.map(tag => (
+              <button key={tag} className="tag-button" onClick={() => removeTag(tag)}>
+                {tag.charAt(0).toUpperCase() + tag.slice(1)}
+                <span className="close-tag">&times;</span>
+              </button>
+            ))}
+          </div>
+
           <input
             type="text"
             placeholder="Search by Name or Email"
@@ -117,11 +153,9 @@ const Profile = () => {
 
           {/* User Table */}
           {loading ? (
-            <DotLottieReact
-      src="https://lottie.host/b68051e4-e953-44b7-88d2-c97ccd5ad262/4maKY1pCnF.lottie"
-      loop
-      autoplay
-    />
+            <div className="loader-container">
+              <img src="/PageLoading.gif" alt="Loading table..." className="table-loader" />
+            </div>
           ) : (
             <div className="user-data-table">
               <table>

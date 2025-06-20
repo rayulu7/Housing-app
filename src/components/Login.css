@@ -59,7 +59,7 @@ body {
   box-sizing: border-box;
 }
 
-/* Password Toggle Icon */
+
 .password-container input {
   padding-right: 40px;
 }
@@ -115,7 +115,7 @@ body {
 .create-button {
   width: 100%;
   padding: 12px;
-  background-color: #156000;
+  background-color: #186901;
   color: white;
   border: none;
   border-radius: 6px;
@@ -126,6 +126,6 @@ body {
 }
 
 .create-button:hover {
-  background-color: #52177c;
+  background-color: #114603;
   color: white;
 }
