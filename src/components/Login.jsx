@@ -46,7 +46,7 @@ const Login = () => {
     <div className="login-container">
       <h1 className="heading">housing.in</h1>
       <form className="login-form" onSubmit={handleLogin}>
-        {/* Email Field */}
+       
         <div className="form-group">
           <input
             type="text"
@@ -58,7 +58,7 @@ const Login = () => {
           />
         </div>
 
-        {/* Password Field */}
+        
         <div className="form-group password-container">
           <input
             type={showPassword ? "text" : "password"}
@@ -79,15 +79,15 @@ const Login = () => {
           </span>
         </div>
 
-        {/* Login Button */}
+        
         <button type="submit" className="login-button">Login</button>
 
-        {/* Forgotten Password Link */}
+       
         <p className="signup-link">
           <a href="/register">Forgotten Password?</a>
         </p>
 
-        {/* Create New Account Button */}
+       
         <button
           type="button"
           className="create-button"

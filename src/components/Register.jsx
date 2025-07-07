@@ -128,9 +128,9 @@ const Register = () => {
             <h1 className="logo">housing.in</h1>
           </header>
 
-          {/* Main Content */}
+          
           <main className="main-content">
-            {/* Left Section */}
+            
             <div className="left-section">
               <div className="image-card">
                 <img src="/image.png" alt="Housing Platform" />
@@ -143,11 +143,11 @@ const Register = () => {
               </div>
             </div>
 
-            {/* Right Section: Registration Form */}
+            
             <div className="right-section">
               <h2>Create Account</h2>
 
-              {/* Name - First Name & Surname */}
+            
               <div className="form-row">
                 <label className="form-label">Name</label>
                 <div className="input-group">
@@ -156,7 +156,7 @@ const Register = () => {
                 </div>
               </div>
 
-              {/* Date of Birth */}
+              
               <div className="form-row">
                 <label className="form-label">Date of Birth</label>
                 <div className="input-group dob-fields">
@@ -166,7 +166,7 @@ const Register = () => {
                 </div>
               </div>
 
-              {/* Gender */}
+             
               <div className="form-row">
                 <label className="form-label">Gender</label>
                 <div className="input-group gender-fields">
@@ -179,7 +179,7 @@ const Register = () => {
                 </div>
               </div>
 
-              {/* Email */}
+            
               <div className="form-row">
                 <label className="form-label">Email</label>
                 <div className="input-group">
@@ -187,7 +187,7 @@ const Register = () => {
                 </div>
               </div>
 
-              {/* Phone */}
+              
               <div className="form-row">
                 <label className="form-label">Phone</label>
                 <div className="input-group phone-fields">
@@ -200,7 +200,7 @@ const Register = () => {
                 </div>
               </div>
 
-              {/* Address */}
+            
               <div className="form-row">
                 <label className="form-label">Residential Address</label>
                 <div className="address-grid">
@@ -222,7 +222,7 @@ const Register = () => {
                 </div>
               </div>
 
-              {/* Password */}
+              
               <div className="form-row">
                 <label className="form-label">Password</label>
                 <div className="input-group">
@@ -233,7 +233,7 @@ const Register = () => {
             </div>
           </main>
 
-          {/* Navigation Arrows */}
+         
           <div className="navigation-arrows">
             <button type="button" className="arrow-btn left-arrow" disabled onClick={() => navigate(-1)}>
               <IoIosArrowDropleft size={40} />

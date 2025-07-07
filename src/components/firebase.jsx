@@ -11,6 +11,8 @@ import {
   getFirestore,
   collection,
   addDoc,
+  setDoc,
+  getDoc,
   getDocs,
   onSnapshot,
   query,
@@ -54,7 +56,9 @@ export {
   signOut,
   collection,
   addDoc,
+  getDoc,
   getDocs,
+  setDoc,
   onSnapshot,
   query,
   doc

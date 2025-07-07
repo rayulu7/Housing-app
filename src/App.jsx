@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-
-import "./App.css";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
 } from "react-router-dom";
-
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -16,6 +13,7 @@ import { auth } from "./components/firebase";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
+import ReviewForm from "./components/ReviewForm";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -26,16 +24,17 @@ function App() {
       setUser(user);
       setLoading(false);
     });
-
-    return () => unsubscribe(); 
+    return () => unsubscribe();
   }, []);
 
   if (loading) {
-    return <DotLottieReact
-      src="https://lottie.host/554865d0-7321-4555-a55b-5f2c43b86877/jRiPqFkmJX.lottie"
-      loop
-      autoplay
-    />; 
+    return (
+      <DotLottieReact
+        src="https://lottie.host/554865d0-7321-4555-a55b-5f2c43b86877/jRiPqFkmJX.lottie"
+        loop
+        autoplay
+      />
+    );
   }
 
   return (
@@ -44,13 +43,12 @@ function App() {
         <div className="auth-wrapper">
           <div className="auth-inner">
             <Routes>
-              <Route
-                path="/"
-                element={user ? <Navigate to="/profile" /> : <Login />}
-              />
+              <Route path="/" element={user ? <Navigate to="/profile" /> : <Login />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/profile" element={<Profile />} />
+              
+              <Route path="/review/:userId" element={<ReviewForm />} /> 
             </Routes>
             <ToastContainer />
           </div>
