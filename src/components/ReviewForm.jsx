@@ -119,6 +119,7 @@ const ReviewForm = ({ reviewedUserId }) => {
         {loading ? "Submitting..." : "Submit Review"}
       </button>
     </form>
+    
   );
 };
 
